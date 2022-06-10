@@ -1,6 +1,7 @@
 import 'package:demo/app_booklist/screens/detail_screen.dart';
 import 'package:demo/app_booklist/screens/list_screen.dart';
 import 'package:demo/app_timer/screens/timer_screen.dart';
+import 'package:demo/app_todolist/screens/splash_screen.dart';
 import 'package:demo/hello_world.dart';
 import 'package:demo/screens/counter_demo.dart';
 import 'package:demo/screens/first_screen.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: TimerScreen(),
+      home: SplashScreen(),
     );
   }
 }
