@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:demo/app_booklist/screens/list_screen.dart';
 import 'package:demo/app_todolist/providers/todo_default.dart';
+import 'package:demo/app_todolist/providers/todo_provider.dart';
+import 'package:demo/app_todolist/providers/todo_sqlite.dart';
 import 'package:flutter/material.dart';
 
 import '../models/todo.dart';
@@ -15,18 +17,25 @@ class ListScreen extends StatefulWidget {
 
 class _ListScreenState extends State<ListScreen> {
   List<Todo> todoList = [];
-  TodoDefault todoDefault = TodoDefault();
+  TodoProvider todoProvider = TodoSqliteProvider();
   bool isLoading = true;
+
+  Future initDb() async {
+    await todoProvider
+        .initDb()
+        .then((value) async => {todoList = await todoProvider.getTodos()});
+  }
 
   @override
   void initState() {
     super.initState();
 
     Timer(const Duration(seconds: 2), () {
-      todoList = todoDefault.getTodos();
-      setState(() {
-        isLoading = false;
-      });
+      initDb().then((value) => {
+            setState(() {
+              isLoading = false;
+            })
+          });
     });
   }
 
@@ -80,11 +89,15 @@ class _ListScreenState extends State<ListScreen> {
                     ),
                     actions: [
                       TextButton(
-                          onPressed: () {
+                          onPressed: () async {
+                            await todoProvider.addTodo(
+                                Todo(title: title, description: description));
+                            List<Todo> find = await todoProvider.getTodos();
                             setState(() {
-                              todoDefault.addTodo(
-                                  Todo(title: title, description: description));
+                              todoList = find;
                             });
+
+                            if (!mounted) return;
                             Navigator.of(context).pop();
                           },
                           child: const Text('Add')),
@@ -174,9 +187,13 @@ class _ListScreenState extends State<ListScreen> {
                                                     id: todoList[index].id,
                                                     title: title,
                                                     description: description);
+                                                todoProvider.updateTodo(build);
+                                                var todos = await todoProvider
+                                                    .getTodos();
                                                 setState(() {
-                                                  todoDefault.updateTodo(build);
+                                                  todoList = todos;
                                                 });
+                                                if (!mounted) return;
                                                 Navigator.of(context).pop();
                                               },
                                               child: const Text('Edit')),
@@ -208,10 +225,15 @@ class _ListScreenState extends State<ListScreen> {
                                         actions: [
                                           TextButton(
                                               onPressed: () async {
+                                                todoProvider.deleteTodo(
+                                                    todoList[index].id ?? 0);
+                                                List<Todo> todos =
+                                                    await todoProvider
+                                                        .getTodos();
                                                 setState(() {
-                                                  todoDefault.deleteTodo(
-                                                      todoList[index].id ?? 0);
+                                                  todoList = todos;
                                                 });
+                                                if (!mounted) return;
                                                 Navigator.of(context).pop();
                                               },
                                               child: const Text(
