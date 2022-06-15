@@ -5,9 +5,18 @@ import 'package:demo/app_todolist/screens/splash_screen.dart';
 import 'package:demo/hello_world.dart';
 import 'package:demo/screens/counter_demo.dart';
 import 'package:demo/screens/first_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MyApp());
 }
 
