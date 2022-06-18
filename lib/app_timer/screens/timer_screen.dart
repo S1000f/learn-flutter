@@ -13,6 +13,8 @@ enum TimerStatus {
 }
 
 class TimerScreen extends StatefulWidget {
+  const TimerScreen({Key? key}) : super(key: key);
+
   @override
   State createState() {
     return _TimerScreenState();

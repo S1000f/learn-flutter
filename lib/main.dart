@@ -1,6 +1,10 @@
+import 'package:demo/app_booklist/app_booklist.dart';
 import 'package:demo/app_booklist/screens/detail_screen.dart';
 import 'package:demo/app_booklist/screens/list_screen.dart';
+import 'package:demo/app_provider/app_provider.dart';
+import 'package:demo/app_timer/app_timer.dart';
 import 'package:demo/app_timer/screens/timer_screen.dart';
+import 'package:demo/app_todolist/app_todolist.dart';
 import 'package:demo/app_todolist/screens/splash_screen.dart';
 import 'package:demo/bloc_demo/blocs/counter/counter_bloc.dart';
 import 'package:demo/bloc_demo/screens/counter_home_screen.dart';
@@ -11,6 +15,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'bloc_demo/app_bloc_demo.dart';
 import 'bloc_demo/screens/counter_screen.dart';
 import 'firebase_options.dart';
 
@@ -20,39 +25,11 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const MyAppBloc());
-}
-
-class MyAppBloc extends StatelessWidget {
-  const MyAppBloc({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CounterBloc(),
-      child: MaterialApp(
-        title: 'Flutter State Bloc',
-        routes: {'/': (context) => const CounterHomeScreen(), '/counter': (context) => const CounterScreen()},
-        initialRoute: '/',
-      ),
-    );
-  }
+  runApp(const AppProvider());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      home: SplashScreen(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
