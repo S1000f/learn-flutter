@@ -2,14 +2,17 @@ import 'package:demo/app_booklist/screens/detail_screen.dart';
 import 'package:demo/app_booklist/screens/list_screen.dart';
 import 'package:demo/app_timer/screens/timer_screen.dart';
 import 'package:demo/app_todolist/screens/splash_screen.dart';
+import 'package:demo/bloc_demo/blocs/counter/counter_bloc.dart';
+import 'package:demo/bloc_demo/screens/counter_home_screen.dart';
 import 'package:demo/hello_world.dart';
 import 'package:demo/screens/counter_demo.dart';
 import 'package:demo/screens/first_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'bloc_demo/screens/counter_screen.dart';
 import 'firebase_options.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +20,23 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const MyApp());
+  runApp(const MyAppBloc());
+}
+
+class MyAppBloc extends StatelessWidget {
+  const MyAppBloc({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => CounterBloc(),
+      child: MaterialApp(
+        title: 'Flutter State Bloc',
+        routes: {'/': (context) => const CounterHomeScreen(), '/counter': (context) => const CounterScreen()},
+        initialRoute: '/',
+      ),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -39,7 +58,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('title!'),
+          title: const Text('title!'),
         ),
         body: getButtons());
   }
@@ -50,12 +69,12 @@ getButtons() {
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        TextButton(onPressed: () {}, child: Text('Text Button')),
-        Padding(padding: EdgeInsets.all(20)),
-        ElevatedButton(onPressed: () {}, child: Text('Eleveated Button')),
-        Padding(padding: EdgeInsets.all(20)),
-        OutlinedButton(onPressed: () {}, child: Text('Outlined Button')),
-        Padding(padding: EdgeInsets.all(20)),
+        TextButton(onPressed: () {}, child: const Text('Text Button')),
+        const Padding(padding: EdgeInsets.all(20)),
+        ElevatedButton(onPressed: () {}, child: const Text('Eleveated Button')),
+        const Padding(padding: EdgeInsets.all(20)),
+        OutlinedButton(onPressed: () {}, child: const Text('Outlined Button')),
+        const Padding(padding: EdgeInsets.all(20)),
         IconButton(
           onPressed: () {},
           icon: Icon(Icons.star),
@@ -67,8 +86,8 @@ getButtons() {
 
 getOverflowed() {
   return ListView(
+    padding: const EdgeInsets.fromLTRB(40, 60, 40, 40),
     children: [for (var i = 0; i < 50; i++) Text('go buttom overflowed $i')],
-    padding: EdgeInsets.fromLTRB(40, 60, 40, 40),
   );
 }
 
@@ -76,10 +95,7 @@ Center getFontExample(bool isHack) {
   return Center(
     child: Text(
       'Hello Flutter!',
-      style: TextStyle(
-          fontSize: 25,
-          fontFamily: isHack ? 'Hack' : 'Ubuntu Mono',
-          fontWeight: FontWeight.w300),
+      style: TextStyle(fontSize: 25, fontFamily: isHack ? 'Hack' : 'Ubuntu Mono', fontWeight: FontWeight.w300),
     ),
   );
 }
@@ -140,27 +156,18 @@ Stack getStack() {
   );
 }
 
-Row getRow(MainAxisSize axisSize, MainAxisAlignment axisAlignment,
-    CrossAxisAlignment crossAxisAlignment) {
+Row getRow(MainAxisSize axisSize, MainAxisAlignment axisAlignment, CrossAxisAlignment crossAxisAlignment) {
   return Row(
     mainAxisSize: axisSize,
     mainAxisAlignment: axisAlignment,
     crossAxisAlignment: crossAxisAlignment,
-    children: [
-      getContainer(Colors.teal),
-      getContainer(Colors.amber),
-      getContainer(Colors.deepPurple)
-    ],
+    children: [getContainer(Colors.teal), getContainer(Colors.amber), getContainer(Colors.deepPurple)],
   );
 }
 
 Column getColumn() {
   return Column(
-    children: [
-      getContainer(Colors.pink),
-      getContainer(Colors.yellow),
-      getContainer(Colors.cyan)
-    ],
+    children: [getContainer(Colors.pink), getContainer(Colors.yellow), getContainer(Colors.cyan)],
   );
 }
 
