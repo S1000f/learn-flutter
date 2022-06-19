@@ -150,20 +150,15 @@ class _TimerScreenState extends State<TimerScreen> {
     final List<Widget> stoppedButtons = [
       ElevatedButton(
         onPressed: run,
-        style: ElevatedButton.styleFrom(
-            primary: _timerStatus == TimerStatus.resting
-                ? Colors.green
-                : Colors.blue),
-        child: const Text('start',
-            style: TextStyle(color: Colors.white, fontSize: 16)),
+        style: ElevatedButton.styleFrom(primary: _timerStatus == TimerStatus.resting ? Colors.green : Colors.blue),
+        child: const Text('start', style: TextStyle(color: Colors.white, fontSize: 16)),
       )
     ];
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Pomodoro Timer'),
-        backgroundColor:
-            _timerStatus == TimerStatus.resting ? Colors.green : Colors.blue,
+        backgroundColor: _timerStatus == TimerStatus.resting ? Colors.green : Colors.blue,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -172,17 +167,11 @@ class _TimerScreenState extends State<TimerScreen> {
             height: MediaQuery.of(context).size.height * 0.5,
             width: MediaQuery.of(context).size.width * 0.6,
             decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: _timerStatus == TimerStatus.resting
-                    ? Colors.green
-                    : Colors.blue),
+                shape: BoxShape.circle, color: _timerStatus == TimerStatus.resting ? Colors.green : Colors.blue),
             child: Center(
               child: Text(
                 secondsToString(_timer),
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 48,
-                    fontWeight: FontWeight.bold),
+                style: const TextStyle(color: Colors.white, fontSize: 48, fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -190,9 +179,7 @@ class _TimerScreenState extends State<TimerScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: _timerStatus == TimerStatus.resting
                 ? []
-                : (_timerStatus == TimerStatus.stopped
-                    ? stoppedButtons
-                    : runningButtons),
+                : (_timerStatus == TimerStatus.stopped ? stoppedButtons : runningButtons),
           )
         ],
       ),

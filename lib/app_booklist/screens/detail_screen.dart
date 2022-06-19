@@ -8,12 +8,7 @@ class DetailScreen extends StatelessWidget {
   late final String description;
   late final String image;
 
-  DetailScreen({
-    required this.title,
-    required this.subtitle,
-    required this.description,
-    required this.image
-  });
+  DetailScreen({required this.title, required this.subtitle, required this.description, required this.image});
 
   DetailScreen.book(Book book) {
     title = book.title;
@@ -37,10 +32,7 @@ class DetailScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  width: MediaQuery
-                      .of(context)
-                      .size
-                      .width * 0.8,
+                  width: MediaQuery.of(context).size.width * 0.8,
                   padding: const EdgeInsets.all(0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,23 +40,18 @@ class DetailScreen extends StatelessWidget {
                       Container(
                         child: Text(
                           title,
-                          style: const TextStyle(
-                              fontSize: 23, fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
                         ),
                       ),
                       Text(
                         subtitle,
-                        style: const TextStyle(
-                            fontSize: 18, color: Colors.grey),
+                        style: const TextStyle(fontSize: 18, color: Colors.grey),
                       ),
                     ],
                   ),
                 ),
                 Container(
-                  width: MediaQuery
-                      .of(context)
-                      .size
-                      .width * 0.15,
+                  width: MediaQuery.of(context).size.width * 0.15,
                   padding: const EdgeInsets.all(10),
                   child: const Center(
                     child: Icon(
@@ -122,7 +109,6 @@ class DetailScreen extends StatelessWidget {
               child: Text(description),
             )
           ],
-
-    ));
+        ));
   }
 }

@@ -2,6 +2,7 @@ import 'package:demo/app_booklist/app_booklist.dart';
 import 'package:demo/app_booklist/screens/detail_screen.dart';
 import 'package:demo/app_booklist/screens/list_screen.dart';
 import 'package:demo/app_provider/app_provider.dart';
+import 'package:demo/app_shoppingmall/app_shoppingmall.dart';
 import 'package:demo/app_timer/app_timer.dart';
 import 'package:demo/app_timer/screens/timer_screen.dart';
 import 'package:demo/app_todolist/app_todolist.dart';
@@ -25,7 +26,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const AppProvider());
+  runApp(const AppShoppingMall());
 }
 
 class MyApp extends StatelessWidget {
@@ -54,7 +55,7 @@ getButtons() {
         const Padding(padding: EdgeInsets.all(20)),
         IconButton(
           onPressed: () {},
-          icon: Icon(Icons.star),
+          icon: const Icon(Icons.star),
         )
       ],
     ),
