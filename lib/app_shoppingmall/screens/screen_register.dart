@@ -1,7 +1,7 @@
 import 'package:demo/app_shoppingmall/components/button_confirm.dart';
 import 'package:demo/app_shoppingmall/components/input_email.dart';
 import 'package:demo/app_shoppingmall/components/input_password.dart';
-import 'package:demo/app_shoppingmall/models/model_auth.dart';
+import 'package:demo/app_shoppingmall/providers/provider_auth.dart';
 import 'package:demo/app_shoppingmall/models/model_register.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

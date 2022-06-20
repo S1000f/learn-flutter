@@ -1,5 +1,5 @@
 import 'package:demo/app_shoppingmall/components/button_text.dart';
-import 'package:demo/app_shoppingmall/models/model_auth.dart';
+import 'package:demo/app_shoppingmall/providers/provider_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

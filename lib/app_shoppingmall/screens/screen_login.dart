@@ -6,7 +6,7 @@ import 'package:demo/app_shoppingmall/models/model_login.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../models/model_auth.dart';
+import '../providers/provider_auth.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
