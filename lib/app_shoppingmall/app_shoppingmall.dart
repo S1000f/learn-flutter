@@ -1,3 +1,4 @@
+import 'package:demo/app_shoppingmall/models/model_query.dart';
 import 'package:demo/app_shoppingmall/providers/provider_auth.dart';
 import 'package:demo/app_shoppingmall/providers/provider_item.dart';
 import 'package:demo/app_shoppingmall/screens/screen_index.dart';
@@ -18,7 +19,8 @@ class AppShoppingMall extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => FirebaseAuthProvider()),
-        ChangeNotifierProvider(create: (context) => ItemProvider())
+        ChangeNotifierProvider(create: (context) => ItemProvider()),
+        ChangeNotifierProvider(create: (context) => SearchQuery()),
       ],
       child: MaterialApp(
         title: 'Flutter Shopping Mall Demo',
